@@ -17,6 +17,12 @@ type contract struct {
 	basic int
 }
 
+type freelancer struct {
+	id int
+	hours int
+	rate int
+}
+
 func main() {
 	p1 := permanent{
 		id:    1,
@@ -35,7 +41,19 @@ func main() {
 		basic: 8000,
 	}
 
-	employees := []SalaryCalculator{p1, p2, c1}
+	f1 := freelancer{
+		id:    4,
+		hours: 20,
+		rate:  87,
+	}
+
+	f2 := freelancer{
+		id:    5,
+		hours: 10,
+		rate:  56,
+	}
+
+	employees := []SalaryCalculator{p1, p2, c1, f1, f2}
 	totalExpenses(employees)
 }
 
@@ -45,6 +63,10 @@ func (p permanent) CalculateSalary() int {
 
 func (c contract) CalculateSalary() int {
 	return c.basic
+}
+
+func (f freelancer) CalculateSalary() int {
+	return f.hours * f.rate
 }
 
 func totalExpenses(s []SalaryCalculator) {
